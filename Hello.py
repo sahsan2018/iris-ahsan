@@ -22,9 +22,10 @@ def run():
     st.set_page_config(
         page_title="Hello",
         page_icon="👋",
+        #d = {'KNN': ["Nearest Neighbor", "Supervised"], 'Decision Tree': ["Decision Tree", "Supervision"], 'SVM': ["Support Vector Machine", "Supervision"]},
     )
 
-    st.write("# Welcome to Streamlit! 👋")
+    st.write("# :balloon: Welcome to Streamlit! 👋")
 
     st.sidebar.success("Select a demo above.")
 
@@ -46,6 +47,11 @@ def run():
     """
     )
 
+    models = st.multiselect(
+            "ML Model", ["KNN", "SVM", "Bayes", "Tree"], ["KNN", "Tree"]
+    )
+
+    st.markdown(f"These are the selected items: {models}")
 
 if __name__ == "__main__":
     run()
