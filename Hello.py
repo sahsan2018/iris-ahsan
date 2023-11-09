@@ -14,36 +14,44 @@
 
 import streamlit as st
 import numpy as np
+import joblib
+import sklearn
 from streamlit.logger import get_logger
 
 LOGGER = get_logger(__name__)
 
-class Model:
-    def __init__(self):
-        pass
+# class Model:
+#     def __init__(self):
+#         pass
     
-    def predict(self, instances):
-        predictions = []
-        for i in instances:
-            predictions.append(2)
+#     def predict(self, instances):
+#         predictions = []
+#         for i in instances:
+#             predictions.append(2)
 
-        return np.array(predictions)
+#         return np.array(predictions)
 
-def classify(instances):
-    model=Model()
-    classes = model.predict(instances)
-    return classes
+# def classify(instances):
+#     model=Model()
+#     classes = model.predict(instances)
+#     return classes
 
 def run():
-    st.set_page_config(
-        page_title="Hello",
-        page_icon="👋",
-        #d = {'KNN': ["Nearest Neighbor", "Supervised"], 'Decision Tree': ["Decision Tree", "Supervision"], 'SVM': ["Support Vector Machine", "Supervision"]},
-    )
+    # st.set_page_config(
+    #     page_title="Hello",
+    #     page_icon="👋",
+    #     #d = {'KNN': ["Nearest Neighbor", "Supervised"], 'Decision Tree': ["Decision Tree", "Supervision"], 'SVM': ["Support Vector Machine", "Supervision"]},
+    # )
+
+    #load scaler
+    scaler = joblib.load('iris-scaler.pkl')
+
+    #load model
+    model = joblib.loead('svc_model.pkl')
 
     st.write("# :white_flower: Welcome to the Iris Classifier 👋")
 
-    st.sidebar.success("Select a demo above.")
+    # st.sidebar.success("Select a demo above.")
 
     st.markdown(
         """
@@ -61,12 +69,18 @@ def run():
     if st.button('Submit'):
         st.write(f'The values you submitted are: ', sepal_length, sepal_width, petal_length, petal_width)
         user_iris = np.array([[sepal_length, sepal_width, petal_length, petal_width]])
-        results = classify(user_iris)
-        iris_classes = ['Iris-Setosa', 'Iris-versicolor', 'Iris-virginica']
-        for i in results:
-            st.write(f'Your iris is of type:  {iris_classes[i]}')
 
-   
+        #scale inputs
+        user_iris_scaled = scaler.transform(user_iris)
+        st.write(f'Scaled Data: {user_iris_scaled}')
+
+        #use model to predict
+        results = model.predict(user_iris_scaled)
+
+        st.write(f'The results are : {results}')
+        iris_classes = ['Iris-Setosa', 'Iris-Versicolor', 'Iris-Virginica']
+        for i in results:
+            st.write(f'Your iris is of type: {iris_classes[i]}')
 
 if __name__ == "__main__":
     run()
