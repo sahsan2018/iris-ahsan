@@ -47,7 +47,7 @@ def run():
     scaler = joblib.load('iris-scaler.pkl')
 
     #load model
-    model = joblib.loead('svc_model.pkl')
+    model = joblib.load('svc_model.pkl')
 
     st.write("# :white_flower: Welcome to the Iris Classifier 👋")
 
