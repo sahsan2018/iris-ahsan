@@ -76,8 +76,8 @@ def run():
 
         #use model to predict
         results = model.predict(user_iris_scaled)
-
         st.write(f'The results are : {results}')
+        
         iris_classes = ['Iris-Setosa', 'Iris-Versicolor', 'Iris-Virginica']
         for i in results:
             st.write(f'Your iris is of type: {iris_classes[i]}')

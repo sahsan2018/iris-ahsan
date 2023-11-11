@@ -1,7 +1,5 @@
-# Welcome to streamlit
+# Welcome to the Iris Classifier
 
-This is the app you get when you run `streamlit hello`, extracted as its own app.
+This is a basic classifier app for the iris dataset, built on top of the default streamlit template.
 
-Edit [Hello.py](./Hello.py) to customize this app to your heart's desire. ❤️
-
-Check it out on [Streamlit Community Cloud](https://st-hello-app.streamlit.app/)
+This iteration utilizes Support Vector Classification, but can be modified to use other classifiers if desired.
